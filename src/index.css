@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 280 25% 98%;
+    --foreground: 280 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 280 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 280 10% 10%;
+
+    --primary: 280 70% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 280 20% 90%;
+    --secondary-foreground: 280 30% 20%;
+
+    --muted: 280 10% 90%;
+    --muted-foreground: 280 10% 40%;
+
+    --accent: 45 90% 70%;
+    --accent-foreground: 280 10% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 280 20% 88%;
+    --input: 280 20% 88%;
+    --ring: 280 70% 55%;
+
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(135deg, hsl(280, 25%, 98%), hsl(270, 30%, 96%));
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .birthday-btn {
+    @apply bg-gradient-to-r from-birthday-purple to-birthday-pink text-white 
+    font-semibold rounded-full px-6 py-3 shadow-lg transition-all 
+    hover:shadow-xl hover:translate-y-[-2px] active:translate-y-[0px];
+  }
+
+  .birthday-card {
+    @apply bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6 border-2 border-birthday-light;
+  }
+
+  .confetti {
+    @apply fixed w-4 h-4 pointer-events-none z-50;
+  }
+  
+  .confetti-gold {
+    @apply bg-birthday-gold;
+  }
+  
+  .confetti-purple {
+    @apply bg-birthday-purple;
+  }
+  
+  .confetti-pink {
+    @apply bg-birthday-pink;
+  }
+}
+
+/* Add paper blast animation */
+@keyframes paper-blast {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(var(--random-x, -200) * 1px), 
+                         calc(var(--random-y, -200) * 1px)) 
+               rotate(calc(var(--random-spin, 360) * 1deg));
+    opacity: 0;
+  }
+}
+
+/* Heart animation */
+@keyframes float-heart {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.2);
+  }
+  30% {
+    transform: translateY(-15px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.5);
+  }
+}
+
+/* Apply random values to each piece using CSS variables */
+[class*="paper-blast"] {
+  --random-x: calc(Math.random() * 400 - 200);
+  --random-y: calc(Math.random() * 400 - 200);
+  --random-spin: calc(Math.random() * 720 - 360);
+}
+
